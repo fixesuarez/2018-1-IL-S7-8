@@ -16,6 +16,9 @@ namespace ITI.Work.Tests
             y.Work();
         }
 
+        /// <summary>
+        /// This one too
+        /// </summary>
         [Test]
         public void an_integer_can_overflow()
         {
