@@ -6,7 +6,9 @@ namespace ITI.Work.Tests
     [TestFixture]
     public class FirstTests
     {
-
+        /// <summary>
+        /// This test is extraordinary
+        /// </summary>
         [Test]
         public void yes_we_can()
         {
