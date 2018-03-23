@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
+using FluentAssertions;
 using System;
 
 namespace ITI.Work.Tests
@@ -13,7 +14,8 @@ namespace ITI.Work.Tests
         public void yes_we_can()
         {
             var y = new YesWeCan();
-            y.Work();
+            Assert.DoesNotThrow( () => y.Work(), "There is no exception when we work." );
+            y.Invoking( sut => sut.Work() ).Should().NotThrow( "There is no exception when we work." );
         }
 
         /// <summary>
@@ -22,13 +24,37 @@ namespace ITI.Work.Tests
         [Test]
         public void an_integer_can_overflow()
         {
-            unchecked
+            Action ThisThrow = () =>
             {
-                int i = int.MaxValue + 1;
-            }
+                checked
+                {
+                    int i = int.MaxValue + -2;
+                    i++;
+                    i++;
+                    i++;
+                }
+            };
+            ThisThrow.Should().Throw<OverflowException>();
         }
 
+        [Test]
+        public void playing_with_bitflags()
+        {
+            EngineState state = EngineState.IsRunning
+                                | EngineState.IsClutch;
 
+            bool isRunning = state.CheckRunning();
 
+            isRunning.Should().BeTrue();
+
+            state = state.StopEngine();
+
+            state.CheckRunning().Should().BeFalse();
+
+            state.GetSpeed().Should().Be( 0 );
+            state = state.SetSpeed( 3 );
+            state.GetSpeed().Should().Be( 3 );
+        }
     }
+
 }

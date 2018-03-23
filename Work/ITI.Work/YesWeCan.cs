@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +6,20 @@ namespace ITI.Work
 {
     public class YesWeCan
     {
-        public void Work()
+        readonly string _name;
+        EngineState _state;
+        int _x;
+        int _y;
+
+        public YesWeCan()
         {
-            Console.WriteLine( "Hello" );
+            _name = Guid.NewGuid().ToString( "N" );
+        }
+
+        public void Work( string name = "Unknown" )
+        {
+            Console.WriteLine( "Hello " + name );
+            _state = _state.StartEngine();
         }
     }
 }
