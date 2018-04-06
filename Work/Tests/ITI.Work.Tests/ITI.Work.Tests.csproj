@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ITI.Work\ITI.Work.csproj" />
     <PackageReference Include="NUnit" Version="2.6.4" />
-    <PackageReference Include="FluentAssertions" Version="5.1.2" />
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="NUnit.Runners.Net4" Version="2.6.4" />
   </ItemGroup>
 

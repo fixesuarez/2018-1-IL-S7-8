@@ -15,7 +15,7 @@ namespace ITI.Work.Tests
         {
             var y = new YesWeCan();
             Assert.DoesNotThrow( () => y.Work(), "There is no exception when we work." );
-            y.Invoking( sut => sut.Work() ).Should().NotThrow( "There is no exception when we work." );
+            y.Invoking( sut => sut.Work() ).ShouldNotThrow( "There is no exception when we work." );
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace ITI.Work.Tests
                     i++;
                 }
             };
-            ThisThrow.Should().Throw<OverflowException>();
+            ThisThrow.ShouldThrow<OverflowException>();
         }
 
         [Test]

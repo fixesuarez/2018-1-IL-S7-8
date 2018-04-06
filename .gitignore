@@ -2,3 +2,6 @@
 obj/
 bin/
 *.user
+*.krab
+*.txt
+/Work/Tests/ITI.Work.Tests/StreamTests.cs.p*
