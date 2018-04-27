@@ -142,5 +142,33 @@ namespace ITI.Work.Tests
             myList[2].Should().Be( 10 );
         }
 
+
+        [Test]
+        public void dictionary_at_work()
+        {
+            var d = new ITIDictionary<string, int>();
+            d.Add( "One", 1 );
+            d["Two"] = 2;
+
+            d.Invoking( sut => sut.Add( "One", 1 ) )
+                .ShouldThrow<InvalidOperationException>();
+
+            d["One"].Should().Be( 1 );
+            d["Two"].Should().Be( 2 );
+
+            d["Two"] = 2000;
+
+            d.Count.Should().Be( 2 );
+
+            int count = 0;
+            foreach( KeyValuePair<string,int> kv in d )
+            {
+                Assert.That(  ++count <= d.Count
+                                &&
+                              ((kv.Key == "One") == (kv.Value == 1)
+                                 ||
+                               (kv.Key == "Two" ) == (kv.Value == 2000)) );
+            }
+        }
     }
 }
