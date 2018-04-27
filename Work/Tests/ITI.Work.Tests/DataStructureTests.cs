@@ -169,6 +169,17 @@ namespace ITI.Work.Tests
                                  ||
                                (kv.Key == "Two" ) == (kv.Value == 2000)) );
             }
+
+            d.Remove( "One" );
+            d.Count.Should().Be( 1 );
+
+            d.Remove( "Two" );
+            d.Count.Should().Be( 0 );
+
+            foreach( KeyValuePair<string, int> kv in d )
+            {
+                Assert.Fail( "No way to be here!" );
+            }
         }
     }
 }
