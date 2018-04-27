@@ -11,11 +11,14 @@ namespace ITI.Work.Tests
     public class EnumerableGameTests
     {
 
-        IEnumerable<long> GetNumbers( int start, int count )
+        IEnumerable<long> GetNumbers( long start, long count )
         {
         }
 
-        IEnumerable<long> GetNumbersThatAreNotMultipleOf( int start, int count, IEnumerable<long> divisors )
+        IEnumerable<long> GetNumbersThatAreNotMultipleOf(
+            long start,
+            long count,
+            IEnumerable<long> divisors )
         {
         }
 
