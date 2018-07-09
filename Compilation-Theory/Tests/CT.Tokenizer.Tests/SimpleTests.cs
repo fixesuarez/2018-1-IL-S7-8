@@ -19,7 +19,7 @@ namespace CT.Tokenizer.Tests
         [Fact]
         public void simple_language_terminals()
         {
-            var t = new Tokenizer(" + -    *    (/) " );
+            var t = new Tokenizer(" + -    *    (/) ");
             t.Current.Should().Be(TokenType.Plus);
 
             t.Next().Should().Be(TokenType.Minus);
@@ -36,6 +36,22 @@ namespace CT.Tokenizer.Tests
 
             t.Next().Should().Be(TokenType.ClosePar);
             t.Current.Should().Be(TokenType.ClosePar);
+
+            t.Next().Should().Be(TokenType.EOS);
+            t.Current.Should().Be(TokenType.EOS);
+        }
+
+        [Fact]
+        public void handling_integers()
+        {
+            var t = new Tokenizer(" 3 + 765 ");
+            t.Current.Should().Be(TokenType.Integer);
+            t.IntegerValue.Should().Be( 3 );
+
+            t.Next().Should().Be(TokenType.Plus);
+
+            t.Next().Should().Be(TokenType.Integer);
+            t.IntegerValue.Should().Be(765);
 
             t.Next().Should().Be(TokenType.EOS);
             t.Current.Should().Be(TokenType.EOS);
