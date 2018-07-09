@@ -53,8 +53,8 @@ namespace CT.Tokenizer.Tests
             t.Next().Should().Be(TokenType.Integer);
             t.IntegerValue.Should().Be(765);
 
-            t.Next().Should().Be(TokenType.EOS);
-            t.Current.Should().Be(TokenType.EOS);
+            t.Next().Should().Be(TokenType.EndOfStream);
+            t.Current.Should().Be(TokenType.EndOfStream);
         }
     }
 }

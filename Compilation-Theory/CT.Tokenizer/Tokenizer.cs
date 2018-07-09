@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CT.Tokenizer
 {
@@ -18,9 +20,9 @@ namespace CT.Tokenizer
 
         bool IsEnd => _headPos >= _text.Length;
 
-        char Head => _text[_headPos];
+        char Head => _text[ _headPos ];
 
-        char Forward() => _text[_headPos++];
+        char Forward() => _text[ _headPos++ ];
 
         public TokenType Current => _current;
 
@@ -32,7 +34,8 @@ namespace CT.Tokenizer
             while( !IsEnd && Char.IsWhiteSpace( Head ) ) Forward();
             if( IsEnd ) return _current = TokenType.EndOfStream;
 
-            switch( Forward() )
+            char c = Forward();
+            switch( c )
             {
                 case '(': return _current = TokenType.OpenPar;
                 case ')': return _current = TokenType.ClosePar;
@@ -41,13 +44,23 @@ namespace CT.Tokenizer
                 case '+': return _current = TokenType.Plus;
                 case '-': return _current = TokenType.Minus;
             }
-            return _current = TokenType.Error;
+            int v = c - '0';
+            if( v > 0 && v <= 9 )
+            {
+                while( !IsEnd )
+                {
+                    int d = Head - '0';
+                    if( d >= 0 && d <= 9 )
                     {
-
+                        v = v * 10 + d;
+                        Forward();
                     }
+                    else break;
+                }
+                _currentInteger = v;
+                return _current = TokenType.Integer;
             }
             return _current = TokenType.Error;
         }
-
     }
 }
