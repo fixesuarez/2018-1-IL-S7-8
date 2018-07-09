@@ -35,6 +35,7 @@ namespace CT.Tokenizer
             if( IsEnd ) return _current = TokenType.EndOfStream;
 
             char c = Forward();
+            char c = Forward();
             switch( c )
             {
                 case '(': return _current = TokenType.OpenPar;
@@ -44,19 +45,23 @@ namespace CT.Tokenizer
                 case '+': return _current = TokenType.Plus;
                 case '-': return _current = TokenType.Minus;
             }
+            }
+            // Handling non-terminals.
             int v = c - '0';
-            if( v > 0 && v <= 9 )
+            if (v > 0 && v <= 9)
             {
-                while( !IsEnd )
+               while (!IsEnd)
                 {
                     int d = Head - '0';
-                    if( d >= 0 && d <= 9 )
+                    if (d >= 0 && d <= 9)
                     {
                         v = v * 10 + d;
                         Forward();
                     }
                     else break;
                 }
+                _currentInteger = v;
+                return _current = TokenType.Integer;
                 _currentInteger = v;
                 return _current = TokenType.Integer;
             }
