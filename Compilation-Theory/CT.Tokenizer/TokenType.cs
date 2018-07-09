@@ -7,7 +7,7 @@ namespace CT.Tokenizer
     public enum TokenType
     {
         Error = -1,
-        EOS = 0,
+        EndOfStream = 0,
         Integer,
         Mult,
         Div,

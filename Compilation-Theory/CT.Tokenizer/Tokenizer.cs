@@ -28,9 +28,19 @@ namespace CT.Tokenizer
 
         public TokenType Next()
         {
-            while ( !IsEnd && Char.IsWhiteSpace(Head)) Forward();
+            while( !IsEnd && Char.IsWhiteSpace( Head ) ) Forward();
+            if( IsEnd ) return _current = TokenType.EndOfStream;
 
-            return _current = TokenType.EOS;
+            switch( Forward() )
+            {
+                case '(': return _current = TokenType.OpenPar;
+                case ')': return _current = TokenType.ClosePar;
+                case '*': return _current = TokenType.Mult;
+                case '/': return _current = TokenType.Div;
+                case '+': return _current = TokenType.Plus;
+                case '-': return _current = TokenType.Minus;
+            }
+            return _current = TokenType.Error;
         }
 
     }

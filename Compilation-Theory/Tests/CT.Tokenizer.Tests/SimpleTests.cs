@@ -13,7 +13,7 @@ namespace CT.Tokenizer.Tests
         public void WhiteSpace_are_skipped( string text )
         {
             var t = new Tokenizer(text);
-            t.Current.Should().Be(TokenType.EOS);
+            t.Current.Should().Be(TokenType.EndOfStream);
         }
 
         [Fact]
@@ -37,8 +37,8 @@ namespace CT.Tokenizer.Tests
             t.Next().Should().Be(TokenType.ClosePar);
             t.Current.Should().Be(TokenType.ClosePar);
 
-            t.Next().Should().Be(TokenType.EOS);
-            t.Current.Should().Be(TokenType.EOS);
+            t.Next().Should().Be(TokenType.EndOfStream);
+            t.Current.Should().Be(TokenType.EndOfStream);
         }
     }
 }
