@@ -33,7 +33,8 @@ namespace CT.Tokenizer
             if( IsEnd ) return _current = TokenType.EOS;
 
             // Handling terminals.
-            switch( Forward() )
+            char c = Forward();
+            switch( c )
             {
                 case '*': return _current = TokenType.Mult;
                 case '/': return _current = TokenType.Div;
@@ -41,10 +42,23 @@ namespace CT.Tokenizer
                 case '+': return _current = TokenType.Plus;
                 case '(': return _current = TokenType.OpenPar;
                 case ')': return _current = TokenType.ClosePar;
-                default:
+            }
+            // Handling non-terminals.
+            int v = c - '0';
+            if (v > 0 && v <= 9)
+            {
+               while (!IsEnd)
+                {
+                    int d = Head - '0';
+                    if (d >= 0 && d <= 9)
                     {
-
+                        v = v * 10 + d;
+                        Forward();
                     }
+                    else break;
+                }
+                _currentInteger = v;
+                return _current = TokenType.Integer;
             }
             return _current = TokenType.Error;
         }
