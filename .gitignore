@@ -7,3 +7,4 @@ bin/
 /Work/Tests/ITI.Work.Tests/StreamTests.cs.p*
 .suo
 .vs/
+*.orig
