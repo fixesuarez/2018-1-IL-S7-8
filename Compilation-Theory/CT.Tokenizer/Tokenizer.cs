@@ -20,7 +20,7 @@ namespace CT.Tokenizer
 
         char Head => _text[_headPos];
 
-        void Forward() => _headPos++;
+        char Forward() => _text[_headPos++];
 
         public TokenType Current => _current;
 
@@ -28,6 +28,7 @@ namespace CT.Tokenizer
 
         public TokenType Next()
         {
+            // Skipping white space.
             while( !IsEnd && Char.IsWhiteSpace( Head ) ) Forward();
             if( IsEnd ) return _current = TokenType.EndOfStream;
 
@@ -39,6 +40,11 @@ namespace CT.Tokenizer
                 case '/': return _current = TokenType.Div;
                 case '+': return _current = TokenType.Plus;
                 case '-': return _current = TokenType.Minus;
+            }
+            return _current = TokenType.Error;
+                    {
+
+                    }
             }
             return _current = TokenType.Error;
         }
