@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CT.Tokenizer\CT.Tokenizer.csproj" />
+    <PackageReference Include="FluentAssertions" version="5.4.0" />
   </ItemGroup>
 
 </Project>
